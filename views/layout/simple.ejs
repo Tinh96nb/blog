@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+
+<head>
+    <%- include ../partials/head %>
+</head>
+
+<body>
+    <div class="pace pace-active"></div>
+    <!-- === HEADER === -->
+    <div id="header" class="container">
+        <%- include ../partials/header %>
+    </div>
+    <div class="content margin-vert-30">
+        <%- body %>
+    </div>
+        <!-- Footer Menu -->
+        <!-- === BEGIN FOOTER === -->
+        <div id="base">
+            <%- include ../partials/footer %>
+        </div>
+        <!-- Footer Menu -->
+        <div id="footer">
+            <%- include ../partials/menufooter %>
+        </div>
+        <!-- End Footer Menu -->
+
+        <%- include ../partials/js %>
+</body>
+
+</html>

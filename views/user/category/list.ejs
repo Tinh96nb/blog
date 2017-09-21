@@ -1,0 +1,67 @@
+<% layout('../../layout/admin') -%>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="white-box">
+                    <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
+                        <select class="form-control pull-right row b-none">
+                                    <option>March 2017</option>
+                                    <option>April 2017</option>
+                                    <option>May 2017</option>
+                                    <option>June 2017</option>
+                                    <option>July 2017</option>
+                                </select>
+                    </div>
+                    <h3 class="box-title">List Category</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>TILTE</th>
+                                    <th>SLUG</th>
+                                    <th>Des</th>
+                                    <th>IMAGE</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <% if (list_category.length > 0) { %>
+
+                                    <% list_category.forEach(function(data) { %>
+
+                                        <tr>
+                                            <td>
+                                                <%= data._id %>
+                                            </td>
+                                            <td class="txt-oflo" data-field="title">
+                                                <%= data.title %>
+                                            </td>
+                                            <td data-field="slug">
+                                                <%= data.slug %>
+                                            </td>
+                                            <td class="txt-oflo" data-field="des">
+                                                <%= data.des %>
+                                            </td>
+                                            <td>
+                                                <img src="../<%= data.image_id.path %>" width="40px;">
+                                            </td>
+                                            <td>
+                                                <a class="button button-small edit" title="Edit">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a>
+                                            </td>
+                                        </tr>
+
+                                        <% }); %>
+
+                                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>

@@ -1,0 +1,115 @@
+<% layout('../../layout/admin') -%>
+    <div class="row bg-title">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <h4 class="page-title">Profile page</h4>
+        </div>
+        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+            <ol class="breadcrumb">
+                <li><a href="#">Dashboard</a></li>
+                <li class="active">Profile Page</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+    <!-- .row -->
+    <div class="col-md-12 col-xs-12">
+        <div class="white-box">
+            <form class="form-horizontal form-material" method="post" action="/user/article" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-md-12">Title</label>
+                    <div class="col-md-12">
+                        <input type="hidden" name="_csrf" value="<%= csurfToken %>">
+                        <input type="text" name="title" id="title" class="form-control form-control-line" onkeyup="ChangeToSlug();"> </div>
+                </div>
+                <div class="form-group">
+                    <label for="example-email" class="col-md-12">Slug</label>
+                    <div class="col-md-12">
+                        <input type="text" name="slug" id="slug" class="form-control form-control-line"> </div>
+                </div>
+                <div class="form-group">
+                    <label for="example-email" class="col-md-12">Category</label>
+                    <div class="col-md-12">
+                        <select name="category" multiple>
+                            <% if (category.length > 0) { %>
+                                <% category.forEach(function(cate) { %>
+                                   <option value="<%=cate._id%>"><%= cate.title%></option>
+                                <% }); %>
+                            <% }; %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="example-email" class="col-md-12">Des</label>
+                    <div class="col-md-12">
+                        <input type="text" name="des" class="form-control form-control-line"> </div>
+                </div>
+                <div class="form-group">
+                    <label for="example-email" class="col-md-12">Tags</label>
+                    <div class="col-md-12">
+                        <input type="text" class="form-control form-control-line"> </div>
+                </div>
+                    <div class="form-group">
+                    <label for="example-email" class="col-md-12">Tags</label>
+                    <div class="col-md-12">
+                        <input type="text" name="tags" class="form-control form-control-line"> </div>
+                </div>
+                    <br>
+                <div class="form-group">
+                    <label for="example-email" class="col-md-12">Content</label>
+                    <div class="col-md-12">
+                        <textarea name="content" id="editor"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-12">Select Image</label>
+                    <div class="col-sm-12">
+                        <input type="file" name="image">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="btn btn-success">Creat Article</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../../ckeditor/ckeditor.js"></script>
+    <script src="../../ckeditor/samples/js/sample.js"></script>
+    <script>
+        initSample();
+
+        function ChangeToSlug() {
+            var title, slug;
+
+            //Lấy text từ thẻ input title 
+            title = document.getElementById("title").value;
+
+            //Đổi chữ hoa thành chữ thường
+            slug = title.toLowerCase();
+
+            //Đổi ký tự có dấu thành không dấu
+            slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+            slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+            slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+            slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+            slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+            slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+            slug = slug.replace(/đ/gi, 'd');
+            //Xóa các ký tự đặt biệt
+            slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+            //Đổi khoảng trắng thành ký tự gạch ngang
+            slug = slug.replace(/ /gi, "-");
+            //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+            //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+            slug = slug.replace(/\-\-\-\-\-/gi, '-');
+            slug = slug.replace(/\-\-\-\-/gi, '-');
+            slug = slug.replace(/\-\-\-/gi, '-');
+            slug = slug.replace(/\-\-/gi, '-');
+            //Xóa các ký tự gạch ngang ở đầu và cuối
+            slug = '@' + slug + '@';
+            slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+            //In slug ra textbox có id “slug”
+            document.getElementById('slug').value = slug;
+        }
+    </script>

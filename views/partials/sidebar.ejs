@@ -1,0 +1,76 @@
+<div class="block">
+    <div class="title">
+        <h3>Search</h3>
+    </div>
+    <div class="content">
+        <form class="form-inline" method="get" action="/search">
+            <div class="form-group">
+                <input type="text" class="form-control input-sm" name="key" placeholder="Search key ...">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </form>
+    </div>
+</div>
+<div class="block">
+    <div class="title">
+        <h3>Category</h3>
+    </div>
+    <div class="content animate fadeInRight">
+        <ul class="menu">
+            <% Category.forEach( function( cate ) { %>
+                <li class="recent-post">
+                    <div class="image-small">
+                        <img class="pull-left" src="<%= cate.image_id.path %>" alt="thumb category">
+                    </div>
+                    <div class="right-text">
+                        <a href="/category/<%= cate.slug %>">
+                            <%= cate.title %>
+                        </a>
+                        <span><%= cate.created_at %></span>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>
+<div class="block">
+    <div class="title">
+        <h3>Top Post</h3>
+    </div>
+    <div class="content animate fadeInRight">
+        <ul class="menu">
+            <% Article.forEach( function( post ) { %>
+                <li class="recent-post">
+                    <div class="image-small">
+                        <img class="pull-left" src="<%= post.image_id.path %>" alt="thumb post">
+                    </div>
+                    <div class="right-text">
+                        <a href="/post/<%= post.slug %>">
+                            <%= post.title %>
+                        </a>
+                        <span><%= post.created_at %></span>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>
+<div class="block">
+    <div class="title">
+        <h3>Facebook</h3>
+    </div>
+    <div class="content animate fadeInRight">
+    </div>
+</div>
+<div class="block">
+    <div class="title">
+        <h3>Tags</h3>
+    </div>
+     <div class="content animate fadeInRight">
+        <ul class="blog-tags">
+            <% Tag.forEach( function( tag ) { %>
+                <li><a href="/tag/<%= tag.tag_name %>" class="blog-tag"><%= tag.tag_name %></a></li>
+            <% })%>
+            </ul>
+     </div>
+</div>

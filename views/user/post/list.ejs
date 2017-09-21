@@ -1,0 +1,75 @@
+<% layout('../../layout/admin') -%>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="white-box">
+                                    <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
+                                        <select class="form-control pull-right row b-none">
+                                    <option>March 2017</option>
+                                    <option>April 2017</option>
+                                    <option>May 2017</option>
+                                    <option>June 2017</option>
+                                    <option>July 2017</option>
+                                </select>
+                                    </div>
+                                    <h3 class="box-title">List Category</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>TILTE</th>
+                                                    <th>SLUG</th>
+                                                    <th>Created</th>
+                                                    <th>Category</th>
+                                                    <th>IMAGE</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <% if (article.length > 0) { %>
+
+                                                    <% article.forEach(function(data) { %>
+
+                                                        <tr>
+                                                            <td>
+                                                                <%= data._id %>
+                                                            </td>
+                                                            <td class="txt-oflo">
+                                                                <%= data.title %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data.slug %>
+                                                            </td>
+                                                            <td class="txt-oflo">
+                                                                <%= data.created_by_id.user_name%>
+                                                            </td>
+                                                            <td class="txt-oflo">
+                                                                <% data.category_id.forEach(function(data) { %>
+
+                                                                    <%= data.title %> ,
+
+                                                                        <% }); %>
+                                                            </td>
+                                                            <td>
+                                                                <img src="../<%= data.image_id.path %>" width="40px;">
+                                                            </td>
+                                                            <td>
+                                                                <a class="button button-small edit" title="Edit">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                        <% }); %>
+                                                            <% } %>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>

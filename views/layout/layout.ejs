@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+
+<head>
+    <%- include ../partials/head %>
+</head>
+
+<body>
+    <div class="pace pace-active"></div>
+    <div id="pre_header" class="visible-lg">
+        <div class="col-md-3 col-md-offset-9">
+            <div class="pull-right">
+                <div class="head-top animate fadeIn">
+                    <% if (login) { %>
+                         Hello <%= user.user_name %>
+                            <a href="/user/logout"> Logout</a>
+                            <% } else {%>
+                                <a href="/user/login">Login</a>
+                                <a href="/user/register">Register</a>
+                                <%  } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- === HEADER === -->
+    <div id="header" class="container ">
+        <%- include ../partials/header %>
+    </div>
+
+    <!-- === BEGIN CONTENT === -->
+    <div class="container margin-top-30 ">
+        <div class="row">
+            <div class="margin-vert-30">
+                <!-- Main content -->
+                <div class="col-md-9 main-content">
+                    <%- body %>
+                </div>
+                <!-- Sidebar -->
+                <div class="col-md-3 sidebar-fix">
+                    <%- include ../partials/sidebar %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- === END CONTENT === -->
+
+    <!-- === BEGIN FOOTER === -->
+    <div id="base">
+        <%- include ../partials/footer %>
+    </div>
+    <!-- Footer Menu -->
+    <div id="footer">
+        <%- include ../partials/menufooter %>
+    </div>
+    <!-- End Footer Menu -->
+
+    <%- include ../partials/js %>
+</body>
+
+</html>

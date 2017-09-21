@@ -1,0 +1,80 @@
+<% layout('../layout/layout') -%>
+<% if(data.status == 'ok'){ %>
+<% data.data.forEach( function( post ) { %>
+    <blockquote class="primary"> Kết quả tìm kiếm cho : <strong><%= data.key %></strong></blockquote>
+    <div class="blog-post animate fadeInUp">
+                <!-- Blog Item Header -->
+                <div class="blog-item-header">
+                    <!-- Title -->
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h2>
+                                <a href="/post/<%= post.slug %>">
+                                    <%= post.title %>
+                                </a>
+                            </h2>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="date"><%= post.created_at %></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- End Title -->
+                </div>
+                <!-- End Blog Item Header -->
+                <!-- Blog Item Details -->
+                <div class="blog-post-details">
+                    <!-- Author Name -->
+                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
+                        <i class="fa fa-user"></i>
+                        <a href="/userpost/<%= post.created_by_id.user_name%>">
+                            <%= post.created_by_id.user_name%>
+                        </a>
+                    </div>
+                    <!-- End Author Name -->
+                    <!-- Tags -->
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
+                        <i class="fa fa-tag"></i>
+                        <% post.tags_id.forEach(function(tag){ %>
+                            <a href="/tag/<%= tag.tag_name %>"><%= tag.tag_name %></a>,
+                        <% }) %>
+                    </div>
+                    <!-- End Tags -->
+                    <!-- # of Comments -->
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+									<i class="fa fa-eye"></i>
+									<%= post.view %> views
+                    </div>
+                    <!-- End # of Comments -->
+                </div>
+                <!-- End Blog Item Details -->
+                <!-- Blog Item Body -->
+                <div class="blog">
+                    <div class="clearfix"></div>
+                    <div class="blog-post-body row padding-vert-20">
+                            <div class="col-md-5">
+                                <div class="image-hover">
+                                    <figure class="">
+                                        <img class="pull-left" src="<%= post.image_id.path %>" alt="thumb1">
+                                    <div class="overlay"><a class="expand" href="/post/<%= post.slug %>">Image Link</a></div>
+                                    </figure>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-7">
+                               <p> <%= post.des %></p>
+                                <!-- Read More -->
+                                <a href="/post/<%= post.slug %>" class="btn btn-sm btn-primary">
+                                            Read More <i class="icon-chevron-right readmore-icon"></i>
+                                        </a>
+                                <!-- End Read More -->
+                            </div>
+                        </div>
+                </div>
+                <!-- End Blog Item Body -->
+            </div>
+    <% }); %>
+    <%} else {%>
+        <blockquote class="primary"> Kết quả tìm kiếm cho : <strong><%= data.key %></strong></blockquote>
+        <h2><%= data.messages %></h2>
+        <% }%>

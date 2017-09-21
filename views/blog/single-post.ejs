@@ -1,0 +1,81 @@
+<% layout('../layout/layout') -%>
+<% if(post){ %>
+<div class="animate fadeInUp margin-bottom-20">
+                <!-- Blog Item Header -->
+                <div class="blog-item-header">
+                    <!-- Date -->
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h2>
+                                    <%= post.title %>
+                            </h2>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="date"><%= post.created_at %></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- End Blog Item Header -->
+
+                <!-- Blog Item Details -->
+                <div class="blog-post-details">
+                    <!-- Author Name -->
+                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
+                        <i class="fa fa-user"></i>
+                        <a href="/userpost/<%= post.created_by_id.user_name%>">
+                            <%= post.created_by_id.user_name%>
+                        </a>
+                    </div>
+                    <!-- End Author Name -->
+                    <!-- Tags -->
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
+                        <i class="fa fa-tag"></i>
+                        <% post.tags_id.forEach(function(tag){ %>
+                            <a href="/tag/<%= tag.tag_name %>"><%= tag.tag_name %></a>,
+                        <% }) %>
+                    </div>
+                    <!-- End Tags -->
+                    <!-- # of Comments -->
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+									<i class="fa fa-eye"></i>
+									<%= post.view %> views
+                    </div>
+                    <!-- End # of Comments -->
+                </div>
+                <!-- End Blog Item Details -->
+                <!-- Blog Item Body -->
+                <div class="blog">
+                    <div class="clearfix"></div>
+                    <div class="blog-post-body row padding-vert-20">
+                        <div class="col-md-12">
+                            <div class="image-post text-center margin-bottom-20">
+                                <img class="text-center" src="<%= post.image_id.path %>" alt="thumb-post" width="185px;">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="content-post"><%- post.body %></div>
+                            <!-- Read More -->
+                            <!-- End Read More -->
+                        </div>
+                    </div>
+                    <!-- comment fb -->
+                    <div id="fb-root"></div>
+                    <script>(function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if (d.getElementById(id)) return;
+                      js = d.createElement(s); js.id = id;
+                      js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=863868720428280";
+                      fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="comment">
+                        <h3> Bình Luận</h3>
+                    </div>
+                    <div class="fb-comments" data-href="http://blogpdt.herokuapp.com/post/<%= post.slug %>" data-numposts="5" data-width="100%"></div>
+                        
+                </div>
+                <!-- End Blog Item Body -->
+            </div>
+             <% } else { %>
+        <blockquote class="primary">không tìm thấy bài viết hoặc đã bị xóa.</blockquote>
+<% } %> 

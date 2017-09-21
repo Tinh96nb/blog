@@ -1,0 +1,44 @@
+<% layout('../layout/simple') -%>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+
+            <p>Already a member? Click <a href="/user/login">HERE</a> to login to your account.</p>
+            <form class="signup-page" action="register" method="post">
+                <div class="signup-header">
+                    <h2>Register a new account</h2>
+                   <% if (FlashErr.length > 0) { %>
+                    <% FlashErr.forEach(function(err) { %>
+                        <div class="alert alert-warning animate fadeIn"><strong>Warning!</strong> <%= err %></div>
+                            <% }); %>
+                                <% } %>
+                </div>
+                <label>User name</label>
+                <input class="form-control margin-bottom-20" type="text" name="user_name">
+
+                <label>Real Name</label>
+                <input class="form-control margin-bottom-20" type="text" name="real_name">
+
+                <label>Email Address <span class="color-red">*</span></label>
+                <input class="form-control margin-bottom-20" type="text" name="mail">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Password <span class="color-red">*</span></label>
+                        <input class="form-control margin-bottom-20" type="password" name="password">
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Confirm Password <span class="color-red">*</span></label>
+                        <input class="form-control margin-bottom-20" type="password" name="repassword">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-8">
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        <input type="hidden" name="_csrf" value="<%= csurfToken %>">
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
